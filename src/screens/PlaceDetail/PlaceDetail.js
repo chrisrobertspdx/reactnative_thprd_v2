@@ -29,9 +29,10 @@ class PlaceDetail extends Component {
         <View>
           <TouchableOpacity onPress={this.placeDeletedHandler}>
             <View style={styles.deleteButton}>
-              <Icon size={30} 
-                    name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'} 
-                    color="#CC0000" 
+              <Icon 
+                size={30} 
+                name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'} 
+                color="#CC0000" 
               />
             </View>
           </TouchableOpacity>
