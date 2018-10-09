@@ -26,6 +26,7 @@ const buttonWithBackground = props => {
             </TouchableNativeFeedback>
         );
     }
+    //move this up to implement
     if (props.disabled) {
         return content;
     }
