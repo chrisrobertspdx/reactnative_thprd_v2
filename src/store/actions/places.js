@@ -14,6 +14,20 @@ export const addPlace = (placeName,location,image) => {
            name: placeName,
            location: location
        };
+       
+       fetch("https://us-central1-reactnative-bad39.cloudfunctions.net/storeImage", {
+           method: "POST",
+           body: JSON.stringify({
+               image: image.base64
+           })
+       })
+       .catch(err => console.log(err))
+       .then(res => res.json())
+       .then(parsedRes => {
+           console.log(parsedRes);
+       })
+
+       /*
        fetch("https://reactnative-bad39.firebaseio.com/places.json", {
            method: "POST",
            body: JSON.stringify(placeData)
@@ -23,6 +37,7 @@ export const addPlace = (placeName,location,image) => {
        .then(parsedRes => {
            console.log(parsedRes);
        })
+       */
    }
 };
 
