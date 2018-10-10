@@ -35,12 +35,13 @@ export const addPlace = (placeName,location,image) => {
             console.log(parsedRes);
             dispatch(uiStopLoading());
         })
+        //add catch
     }
  };
 
  export const getPlaces = () => {
     return dispatch => {
-        fetch("http://www.thprd.org/utilities/api/json.cfm")
+        fetch("https://reactnative-bad39.firebaseio.com/places.json")
         .catch(err => {
             alert("Something went wrong, sorry :/");
             console.log(err);
@@ -57,7 +58,12 @@ export const addPlace = (placeName,location,image) => {
                     key: key
                 });
             }
+            console.log(parsedRes);
             dispatch(setPlaces(places));
+        })
+        .catch(err => {
+            alert("Something went wrong, sorry :/");
+            console.log(err);
         });
     };
 };
@@ -93,6 +99,7 @@ export const deletePlace = (key) => {
             //update store
 
         })
+        //add catch
     }
 }
 

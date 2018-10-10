@@ -2,18 +2,23 @@ import { TRY_AUTH } from './actionTypes';
 import { uiStartLoading, uiStopLoading } from './index';
 import startMainTabs from "../../screens/MainTabs/startMainTabs";
 
-const apikey = 'AIzaSyBa8xtd0PM2z2UcPkdRLuVCst0O-mgB_Co';
 
-export const tryAuth = (authData) => {
+
+export const tryAuth = (authData,authMode) => {
   return dispatch => {
-    dispatch(authSignup(authData));   
+    const apikey = 'AIzaSyBa8xtd0PM2z2UcPkdRLuVCst0O-mgB_Co';
+    let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key="+apikey;
+    dispatch(uiStartLoading());
+    if (authMode === "signup") {
+      url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key="+apikey;
+    }
+    dispatch(authSignup(authData,url)); 
   }
 }
 
-export const authSignup = (authData) => {
+export const authSignup = (authData,url) => {
   return dispatch => {
-    dispatch(uiStartLoading());
-    fetch("https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key="+apikey,{
+    fetch(url,{
       method: "POST",
       body: JSON.stringify({
         email: authData.email,
@@ -42,3 +47,4 @@ export const authSignup = (authData) => {
     })
   }
 }
+
