@@ -40,8 +40,12 @@ export const addPlace = (placeName,location,image) => {
  };
 
  export const getPlaces = () => {
-    return dispatch => {
-        fetch("https://reactnative-bad39.firebaseio.com/places.json")
+    return (dispatch,getState) => {
+        const token = getState().auth.token;
+        if (!token) {
+            return;
+        }
+        fetch("https://reactnative-bad39.firebaseio.com/places.json?auth="+token)
         .catch(err => {
             alert("Something went wrong, sorry :/");
             console.log(err);
